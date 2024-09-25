@@ -48,6 +48,7 @@ document.addEventListener("keydown", (e) => {
             newElem.size.x = poppedElem.size.x
             newElem.size.y = poppedElem.size.y
             newElem.setText(poppedElem.text)
+            newElem.color = poppedElem.color
             timeline.addElement(newElem)
         }
         else activeTextElement.setText(activeTextElement.text + e.key)

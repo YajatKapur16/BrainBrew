@@ -1,6 +1,6 @@
 class ToolbarOption extends ClickableElement{
-    constructor(pos, radius, color, cursor,  ctx) {
-        super(new Path2D(), pos, { x: 0, y: 0 }, () => { console.log("UYAYAYAY")}, cursor, ctx)
+    constructor(pos, radius, color, clickHandler, cursor, ctx) {
+        super(new Path2D(), pos, { x: 0, y: 0 }, clickHandler, cursor, ctx)
         this.pos = {
             x: pos.x,
             y: pos.y
@@ -15,7 +15,7 @@ class ToolbarOption extends ClickableElement{
         if (this.checkHover()) {
             console.log("Hover")
             this.ctx.fillStyle = "black"
-            this.ctx.shadowBlur = 20
+            this.ctx.shadowBlur = 200
             this.ctx.shadowColor = this.color
         }
 

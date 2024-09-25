@@ -11,6 +11,12 @@ class DefaultElement extends ClickableElement{
             y: startPos.y,
         }
 
+        this.child = {}
+        this.childOffset = {
+            x: 0,
+            y: 60
+        }
+
         this.prevPos = {
             x: this.pos.x,
             y: this.pos.y
@@ -36,10 +42,40 @@ class DefaultElement extends ClickableElement{
         }
         this.toolbarHeight = (this.toolbarOptionRadius * 8) + this.toolbarOffset.x
         this.toolbarOptions = [
-                new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOffset.y }, this.toolbarOptionRadius, this.color, this.cursor, this.ctx), 
-                new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 2 + this.toolbarOffset.y * 2}, this.toolbarOptionRadius, this.color, this.cursor, this.ctx),
-                new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 4 + this.toolbarOffset.y * 3}, this.toolbarOptionRadius, this.color, this.cursor, this.ctx),
-                new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 6  + this.toolbarOffset.y * 4}, this.toolbarOptionRadius, this.color, this.cursor, this.ctx)
+
+
+                new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOffset.y }, this.toolbarOptionRadius, this.color, () => {
+                    console.log("Works")
+                    fetch("https://22d4-34-147-25-51.ngrok-free.app/generate", {
+                        method: "post",
+                        body: JSON.stringify({
+                            "prompt": "a beautiful landscape with mountains and rivers",
+                            "negative_prompt": "",
+                            "num_inference_steps": 28,
+                            "guidance_scale": 7.0,
+                            "height": 512,
+                            "width": 512
+                        })
+                    }).then(res => {
+                        console.log(res.json())
+                    })
+                }, this.cursor, this.ctx),
+
+                
+                new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 2 + this.toolbarOffset.y * 2}, this.toolbarOptionRadius, this.color, () => {
+                    console.log("Works")
+                    this.child = new ImageElement( { x: this.pos.x - this.childOffset.x, y: this.pos.y - this.childOffset.y }, this.cursor, this.ctx )
+                }, this.cursor, this.ctx),
+
+
+                new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 4 + this.toolbarOffset.y * 3}, this.toolbarOptionRadius, this.color, () => {
+                    console.log("Works")
+                }, this.cursor, this.ctx),
+
+
+                new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 6  + this.toolbarOffset.y * 4}, this.toolbarOptionRadius, this.color, () => {
+                    console.log("Works")
+                }, this.cursor, this.ctx)
             ]
 
 
@@ -47,10 +83,18 @@ class DefaultElement extends ClickableElement{
     }
     adjustToolbar() {
         this.toolbarOptions = [
-            new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOffset.y }, this.toolbarOptionRadius, this.color, this.cursor, this.ctx), 
-            new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 2 + this.toolbarOffset.y * 2}, this.toolbarOptionRadius, this.color, this.cursor, this.ctx),
-            new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 4 + this.toolbarOffset.y * 3}, this.toolbarOptionRadius, this.color, this.cursor, this.ctx),
-            new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 6  + this.toolbarOffset.y * 4}, this.toolbarOptionRadius, this.color, this.cursor, this.ctx)
+            new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOffset.y }, this.toolbarOptionRadius, this.color,() => {
+                console.log("Works")
+            }, this.cursor, this.ctx), 
+            new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 2 + this.toolbarOffset.y * 2}, this.toolbarOptionRadius, this.color,() => {
+                console.log("Works")
+            }, this.cursor, this.ctx),
+            new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 4 + this.toolbarOffset.y * 3}, this.toolbarOptionRadius, this.color,() => {
+                console.log("Works")
+            }, this.cursor, this.ctx),
+            new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 6  + this.toolbarOffset.y * 4}, this.toolbarOptionRadius, this.color, () => {
+                console.log("Works")
+            },this.cursor, this.ctx)
         ]
     }
 

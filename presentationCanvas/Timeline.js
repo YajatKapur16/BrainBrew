@@ -33,11 +33,17 @@ class Timeline {
 
         this.gradient = this.ctx.createLinearGradient(this.source.x, this.source.y, this.nextElemPos.x, this.source.y)
         this.gradientColors = ["purple"]
+        this.connectors = []
+        this.timelineDrawComplete = false
     }
 
     updateAnimationCoordinates() {
+        this.timelineDrawComplete = false
         if (this.animEnd.x < this.nextElemPos.x) {
             this.animEnd.x += this.speed
+            this.timelineDrawComplete = false
+        } else {
+            this.timelineDrawComplete = true
         }
         
     }

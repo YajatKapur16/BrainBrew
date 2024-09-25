@@ -3,6 +3,7 @@ class ClickableElement {
 
         this.id = Math.random() * 1000
         this.path = path
+        this.handlerInfo = {}
         this.pos = {
             x: pos.x,
             y: pos.y
