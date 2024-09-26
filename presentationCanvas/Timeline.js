@@ -13,7 +13,7 @@ class Timeline {
         this.isMaster = true
         this.source = {
             x: 0,
-            y: 400
+            y: canvas.clientHeight / 2
         }
         this.startPos = {
             x: this.source.x,
