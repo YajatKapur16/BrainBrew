@@ -107,7 +107,7 @@ class DefaultElement extends ClickableElement{
 
             new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 4 + this.toolbarOffset.y * 3}, this.toolbarOptionRadius, this.color,() => {
                 console.log("Works")
-            }, this.cursor, this.ctx, "2.png")
+            }, this.cursor, this.ctx, "1.png")
         ]
     }
 
