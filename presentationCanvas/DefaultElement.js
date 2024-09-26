@@ -58,7 +58,7 @@ class DefaultElement extends ClickableElement{
             new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOffset.y }, this.toolbarOptionRadius, this.color, () => {
                 console.log(this.text)
 
-                fetch("https://737f-34-74-58-143.ngrok-free.app/generate", {
+                fetch("https://1e1c-34-83-124-126.ngrok-free.app/generate", {
                     method: "post",
                     headers: {
                         'Content-Type': 'application/json', // Set the headers for JSON data
@@ -85,7 +85,7 @@ class DefaultElement extends ClickableElement{
             new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 2 + this.toolbarOffset.y * 2}, this.toolbarOptionRadius, this.color,() => {
                 console.log(this.text)
 
-                fetch("https://bbc3-136-233-9-98.ngrok-free.app/generate", {
+                fetch("https://b8af-136-233-9-98.ngrok-free.app/generate", {
                     method: "post",
                     headers: {
                         'Content-Type': 'application/json', // Set the headers for JSON data
