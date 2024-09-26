@@ -52,7 +52,8 @@ class Timeline {
         this.eventCount++
         if (this.alternator) elem.pos.y -= elem.size.y
         elem.adjustToolbar()
-        elem.polarity = this.alternator
+        elem.polarity = !this.alternator
+        console.log(elem.ctx)
         this.events.push(elem)
         this.nextElemPos = {
             x: this.nextElemPos.x +  elem.size.x + this.eventPadding.x,

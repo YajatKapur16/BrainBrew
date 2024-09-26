@@ -5,7 +5,7 @@ class ImageElement extends ClickableElement {
             y: cursor.pos.y - startPos.y
         }, () => {
             img.src = imageUri,
-            imageModal.style.display = "block"
+            imageModal.style.display = "flex"
         }, cursor, ctx);
 
         this.imageUri = imageUri
@@ -30,10 +30,10 @@ class ImageElement extends ClickableElement {
         this.hoverEffects()
     }
 
-    renderImage() {
-        this.path.roundRect(this.pos.x, this.pos.y, this.size.x, this.size.y)
-        this.ctx.stroke(this.path)
-        if (this.loaded) this.ctx.drawImage(this.image, this.pos.x, this.pos.y, this.size.x, this.size.y)
-        this.methodCycle()
-    }
+        renderImage() {
+            this.path.roundRect(this.pos.x, this.pos.y, this.size.x, this.size.y)
+            this.ctx.stroke(this.path)
+            if (this.loaded) this.ctx.drawImage(this.image, this.pos.x, this.pos.y, this.size.x, this.size.y)
+            this.methodCycle()
+        }
 }

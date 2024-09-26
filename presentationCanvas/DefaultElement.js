@@ -6,6 +6,8 @@ class DefaultElement extends ClickableElement{
         }, () => {
             this.toolbar = true
         }, cursor, ctx);
+
+
         this.pos = {
             x: startPos.x,
             y: startPos.y,
@@ -65,7 +67,7 @@ class DefaultElement extends ClickableElement{
     }
     adjustToolbar() {
         this.toolbarOptions = [
-            new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOffset.y }, this.toolbarOptionRadius, () => {
+            new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOffset.y }, this.toolbarOptionRadius, this.color, () => {
                 console.log(this.text)
 
                 fetch("https://737f-34-74-58-143.ngrok-free.app/generate", {
