@@ -11,10 +11,12 @@ class DefaultElement extends ClickableElement{
             y: startPos.y,
         }
 
-        this.child = {}
+        this.polarity = true
+
+        this.child = null
         this.childOffset = {
-            x: 0,
-            y: 60
+            x: 15,
+            y: 40
         }
 
         this.prevPos = {
@@ -44,22 +46,7 @@ class DefaultElement extends ClickableElement{
         this.toolbarOptions = [
 
 
-                new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOffset.y }, this.toolbarOptionRadius, this.color, () => {
-                    console.log("Works")
-                    fetch("https://22d4-34-147-25-51.ngrok-free.app/generate", {
-                        method: "post",
-                        body: JSON.stringify({
-                            "prompt": "a beautiful landscape with mountains and rivers",
-                            "negative_prompt": "",
-                            "num_inference_steps": 28,
-                            "guidance_scale": 7.0,
-                            "height": 512,
-                            "width": 512
-                        })
-                    }).then(res => {
-                        console.log(res.json())
-                    })
-                }, this.cursor, this.ctx),
+                new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOffset.y }, this.toolbarOptionRadius, this.color, () => {}, this.cursor, this.ctx),
 
                 
                 new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 2 + this.toolbarOffset.y * 2}, this.toolbarOptionRadius, this.color, () => {
@@ -70,11 +57,6 @@ class DefaultElement extends ClickableElement{
 
                 new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 4 + this.toolbarOffset.y * 3}, this.toolbarOptionRadius, this.color, () => {
                     console.log("Works")
-                }, this.cursor, this.ctx),
-
-
-                new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 6  + this.toolbarOffset.y * 4}, this.toolbarOptionRadius, this.color, () => {
-                    console.log("Works")
                 }, this.cursor, this.ctx)
             ]
 
@@ -83,18 +65,35 @@ class DefaultElement extends ClickableElement{
     }
     adjustToolbar() {
         this.toolbarOptions = [
-            new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOffset.y }, this.toolbarOptionRadius, this.color,() => {
-                console.log("Works")
+            new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOffset.y }, this.toolbarOptionRadius, () => {
+                console.log(this.text)
+
+                fetch("https://737f-34-74-58-143.ngrok-free.app/generate", {
+                    method: "post",
+                    headers: {
+                        'Content-Type': 'application/json', // Set the headers for JSON data
+                      },
+                    body: JSON.stringify({
+                        "prompt": this.text,
+                        "negative_prompt": "",
+                        "num_inference_steps": 28,
+                        "guidance_scale": 7.0,
+                        "height": 512,
+                        "width": 512
+                    })
+                }).then(res => {
+                    res.json().then(uri => {
+                        console.log(uri)
+                        this.child = new ImageElement( { x: this.pos.x - this.childOffset.x, y: (!this.polarity) ? (this.pos.y - this.childOffset.y - 240) : (this.pos.y + this.size.y + this.childOffset.y) }, this.cursor, this.ctx, uri.image_url)
+                    })
+                })
             }, this.cursor, this.ctx), 
             new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 2 + this.toolbarOffset.y * 2}, this.toolbarOptionRadius, this.color,() => {
                 console.log("Works")
             }, this.cursor, this.ctx),
             new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 4 + this.toolbarOffset.y * 3}, this.toolbarOptionRadius, this.color,() => {
                 console.log("Works")
-            }, this.cursor, this.ctx),
-            new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 6  + this.toolbarOffset.y * 4}, this.toolbarOptionRadius, this.color, () => {
-                console.log("Works")
-            },this.cursor, this.ctx)
+            }, this.cursor, this.ctx)
         ]
     }
 
@@ -147,6 +146,10 @@ class DefaultElement extends ClickableElement{
 
             this.ctx.shadowBlur = 0
             
+        }
+        if (this.child != null) {
+            this.child.renderImage()
+            this.child.methodCycle()
         }
         this.ctx.strokeStyle = "rgba(255, 255, 255, 0.5)"
         this.ctx.shadowBlur = 100

@@ -1,6 +1,8 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d")
 
+const imageModal = document.getElementById("imageContainer")
+const img = document.getElementById("imgTag")
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
@@ -69,4 +71,8 @@ const lineAnimation = (start, finish, stepCount, ctx) => {
         current.x += step.x
         current.y += step.y
     }
+}
+
+const hideImage = () => {
+    imageModal.style.display = "none"
 }

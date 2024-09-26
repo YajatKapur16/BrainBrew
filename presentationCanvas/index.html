@@ -12,16 +12,43 @@
         padding: 0;
     }
     #canvas {
+        position: fixed;
+        z-index: 2;
         background-image: url("./back.jpeg"); 
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
     }
+
+    #imageContainer {
+        position: fixed;
+        display: none;
+        z-index: 4000;
+        width: 80%;
+        height: 80vh;
+        /* From https://css.glass */
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        top: 4vh;
+        right: 10vw;
+    }
+
+    #imgTag {
+        border-radius: 10px;;
+        margin-left: 120px;
+        margin-top: 100px;
+        ;
+    }
 </style>
 <body>
     <canvas id="canvas" width="1800", height="1800"></canvas>
     <div id="imageContainer">
-        
+        <button onclick="hideImage()">Close</button>
+        <img id="imgTag" src="back.jpeg">
     </div>
 </body>
 <script src="setup.js"></script>
