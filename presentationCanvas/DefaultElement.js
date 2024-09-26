@@ -46,20 +46,6 @@ class DefaultElement extends ClickableElement{
         }
         this.toolbarHeight = (this.toolbarOptionRadius * 8) + this.toolbarOffset.x
         this.toolbarOptions = [
-
-
-                new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOffset.y }, this.toolbarOptionRadius, this.color, () => {}, this.cursor, this.ctx),
-
-                
-                new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 2 + this.toolbarOffset.y * 2}, this.toolbarOptionRadius, this.color, () => {
-                    console.log("Works")
-                    this.children.push(new ImageElement( { x: this.pos.x - this.childOffset.x, y: this.pos.y - this.childOffset.y }, this.cursor, this.ctx ))
-                }, this.cursor, this.ctx),
-
-
-                new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 4 + this.toolbarOffset.y * 3}, this.toolbarOptionRadius, this.color, () => {
-                    console.log("Works")
-                }, this.cursor, this.ctx)
             ]
 
 
@@ -91,7 +77,7 @@ class DefaultElement extends ClickableElement{
                         this.children.push(new ImageElement( { x: this.pos.x, y: (!this.polarity) ? (this.pos.y - this.childOffset.y - 240) : (this.pos.y + this.size.y + this.childOffset.y) }, this.cursor, this.ctx, uri.image_url))
                     })
                 })
-            }, this.cursor, this.ctx), 
+            }, this.cursor, this.ctx, "2.png"), 
 
 
 
@@ -113,7 +99,7 @@ class DefaultElement extends ClickableElement{
                         this.children.push(new TextElement( { x: this.pos.x, y: (!this.polarity) ? (this.pos.y - this.childOffset.y - 240) : (this.pos.y + this.size.y + this.childOffset.y) }, this.cursor, this.ctx, text.result))
                     })
                 })
-            }, this.cursor, this.ctx),
+            }, this.cursor, this.ctx, "3.png"),
 
 
 
@@ -121,7 +107,7 @@ class DefaultElement extends ClickableElement{
 
             new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 4 + this.toolbarOffset.y * 3}, this.toolbarOptionRadius, this.color,() => {
                 console.log("Works")
-            }, this.cursor, this.ctx)
+            }, this.cursor, this.ctx, "2.png")
         ]
     }
 
