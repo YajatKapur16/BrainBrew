@@ -15,7 +15,7 @@ class DefaultElement extends ClickableElement{
 
         this.polarity = true
 
-        this.child = null
+        this.children = []
         this.childOffset = {
             x: 15,
             y: 40
@@ -53,7 +53,7 @@ class DefaultElement extends ClickableElement{
                 
                 new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 2 + this.toolbarOffset.y * 2}, this.toolbarOptionRadius, this.color, () => {
                     console.log("Works")
-                    this.child = new ImageElement( { x: this.pos.x - this.childOffset.x, y: this.pos.y - this.childOffset.y }, this.cursor, this.ctx )
+                    this.children.push(new ImageElement( { x: this.pos.x - this.childOffset.x, y: this.pos.y - this.childOffset.y }, this.cursor, this.ctx ))
                 }, this.cursor, this.ctx),
 
 
@@ -67,6 +67,8 @@ class DefaultElement extends ClickableElement{
     }
     adjustToolbar() {
         this.toolbarOptions = [
+
+
             new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOffset.y }, this.toolbarOptionRadius, this.color, () => {
                 console.log(this.text)
 
@@ -86,13 +88,37 @@ class DefaultElement extends ClickableElement{
                 }).then(res => {
                     res.json().then(uri => {
                         console.log(uri)
-                        this.child = new ImageElement( { x: this.pos.x - this.childOffset.x, y: (!this.polarity) ? (this.pos.y - this.childOffset.y - 240) : (this.pos.y + this.size.y + this.childOffset.y) }, this.cursor, this.ctx, uri.image_url)
+                        this.children.push(new ImageElement( { x: this.pos.x, y: (!this.polarity) ? (this.pos.y - this.childOffset.y - 240) : (this.pos.y + this.size.y + this.childOffset.y) }, this.cursor, this.ctx, uri.image_url))
                     })
                 })
             }, this.cursor, this.ctx), 
+
+
+
+
             new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 2 + this.toolbarOffset.y * 2}, this.toolbarOptionRadius, this.color,() => {
-                console.log("Works")
+                console.log(this.text)
+
+                fetch("https://bbc3-136-233-9-98.ngrok-free.app/generate", {
+                    method: "post",
+                    headers: {
+                        'Content-Type': 'application/json', // Set the headers for JSON data
+                      },
+                    body: JSON.stringify({
+                        "prompt": this.text
+                    })
+                }).then(res => {
+                    res.json().then(text => {
+                        console.log(text)
+                        this.children.push(new TextElement( { x: this.pos.x, y: (!this.polarity) ? (this.pos.y - this.childOffset.y - 240) : (this.pos.y + this.size.y + this.childOffset.y) }, this.cursor, this.ctx, text.result))
+                    })
+                })
             }, this.cursor, this.ctx),
+
+
+
+
+
             new ToolbarOption({ x: this.pos.x + this.size.x + this.toolbarOffset.x, y: this.pos.y + this.toolbarOptionRadius * 4 + this.toolbarOffset.y * 3}, this.toolbarOptionRadius, this.color,() => {
                 console.log("Works")
             }, this.cursor, this.ctx)
@@ -149,9 +175,11 @@ class DefaultElement extends ClickableElement{
             this.ctx.shadowBlur = 0
             
         }
-        if (this.child != null) {
-            this.child.renderImage()
-            this.child.methodCycle()
+        if (this.children.length > 0) {
+            this.children.forEach(child => {
+                child.render()
+                child.methodCycle()
+            })
         }
         this.ctx.strokeStyle = "rgba(255, 255, 255, 0.5)"
         this.ctx.shadowBlur = 100

@@ -42,7 +42,36 @@
 
     #imgTag {
         border-radius: 10px;;
-        ;
+    }
+
+    #textContainer {
+        position: fixed;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 4000;
+        width: 80%;
+        height: 80vh;
+        /* From https://css.glass */
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        top: 4vh;
+        right: 10vw;
+    }
+
+    #pTag {
+        border-radius: 10px;
+        width: 80%;
+        height: 100%;
+        text-align: center;
+        color: white;
+        font-weight: 400;
+        font-size: 20px;
     }
 </style>
 <body>
@@ -50,6 +79,12 @@
     <div id="imageContainer">
         <button onclick="hideImage()">Close</button>
         <img id="imgTag" src="back.jpeg">
+    </div>
+
+    <div id="textContainer">
+        <button onclick="hideText()">Close</button>
+        <p id="pTag"> </p>
+    </div>
     </div>
 </body>
 <script src="setup.js"></script>

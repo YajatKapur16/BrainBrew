@@ -3,6 +3,10 @@ const ctx = canvas.getContext("2d")
 
 const imageModal = document.getElementById("imageContainer")
 const img = document.getElementById("imgTag")
+
+const textModal = document.getElementById("textContainer")
+const p = document.getElementById("pTag")
+
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
@@ -74,5 +78,11 @@ const lineAnimation = (start, finish, stepCount, ctx) => {
 }
 
 const hideImage = () => {
+    console.log("Hiding Image")
     imageModal.style.display = "none"
+}
+
+const hideText = () => {
+    console.log("Hiding Text")
+    textModal.style.display = "none"
 }

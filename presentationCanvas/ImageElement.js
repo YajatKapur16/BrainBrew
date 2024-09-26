@@ -30,7 +30,7 @@ class ImageElement extends ClickableElement {
         this.hoverEffects()
     }
 
-        renderImage() {
+        render() {
             this.path.roundRect(this.pos.x, this.pos.y, this.size.x, this.size.y)
             this.ctx.stroke(this.path)
             if (this.loaded) this.ctx.drawImage(this.image, this.pos.x, this.pos.y, this.size.x, this.size.y)
